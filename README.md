@@ -1,6 +1,4 @@
 # iGarden
----
-
 
 ## Participants
  - Magdalena Górska
