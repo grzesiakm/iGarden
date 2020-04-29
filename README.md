@@ -1,6 +1,7 @@
 # iGarden
 ---
 
+
 ## Participants
  - Magdalena Górska
  - Marta Grzesiak
