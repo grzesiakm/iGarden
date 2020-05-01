@@ -15,14 +15,15 @@ A Django web-application that recognises flowers based on uploaded image and pro
 #### List of features:
  - Information on growing selected flowers
  - User registration and logging panel
- - User created lists of plants (e.g. "Home", "Wish List")
- - Favourites plants - marked
+ - User created lists of plants (e.g. "Home", "Wish List") : add, delete, alter
+ - Marking favourites flowers (simultaneously adding to 'Favourites' list)
  - Uploading photos 
+ - Searching flower by name
  - Searching history
- - Water reminders
+ - Marking when water plants selected from lists
+ - Water reminders on e-mail with time passed from last one
  - Suggesting nearest stores
  - Suggesting similar flowers based on photo and treatment
- - Searching flower by name
  - Recognition of flowers using machine learning (possible learning datasets: https://www.robots.ox.ac.uk/~vgg/data/flowers/)
 
 ## Setting up environment
