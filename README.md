@@ -12,7 +12,7 @@
 ## Short descripton of the idea
 A Django web-application that recognises flowers based on uploaded image and provides information on taking care of it. Besides, there are some basic knowledge about each species. 
 
-#### Uder Stories:
+#### User Stories:
  - As a user I want to get my plant recognised based on photo
  - As a user I want information on growing selected flowers
  - As a user I want to create an account and manage it

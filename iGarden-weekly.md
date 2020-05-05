@@ -17,7 +17,7 @@
 ## ---HALF--GOAL---
 ---
 
- ### 3. week - until 24.05.
+### 3. week - until 24.05.
  - recognition of flower based on image (>50%) 
  - user created lists
  - lists' name changing
