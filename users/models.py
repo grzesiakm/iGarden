@@ -18,3 +18,8 @@ class Profile(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.image.path)
+
+
+class Flower(models.Model):
+    description = models.CharField(max_length=255)
+    photo = models.ImageField(upload_to='flowers')
