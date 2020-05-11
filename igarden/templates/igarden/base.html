@@ -24,12 +24,17 @@
                     <div class="navbar-nav mr-auto">
                         <a class="nav-item nav-link" href="{% url 'igarden-home' %}">Home</a>
                         <a class="nav-item nav-link" href="{% url 'igarden-lists' %}">My Lists</a>
-                        <a class="nav-item nav-link" href="{% url 'igarden-find'%}">Find a flower</a>
+                        <a class="nav-item nav-link" href="{% url 'igarden-search' %}">Find a flower</a>
                     </div>
                     <!-- Navbar Right Side -->
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link" href="#">Login</a>
-                        <a class="nav-item nav-link" href="/register">Register</a>
+                        {% if user.is_authenticated %}
+                            <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                            <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                        {% else %}
+                            <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                            <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

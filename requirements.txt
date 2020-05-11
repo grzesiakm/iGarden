@@ -3,4 +3,4 @@ django-heroku
 gunicorn
 requests
 django-crispy-forms
-pillow
+Pillow
