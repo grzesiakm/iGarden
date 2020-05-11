@@ -28,6 +28,12 @@ article{
 margin-right: 15%;
 }
 
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+}
+
 ul{
 padding: 0px;
 }
