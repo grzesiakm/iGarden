@@ -10,13 +10,9 @@ def lists(request):
     return render(request, 'igarden/lists.html')
 
 def search(request):
-    return render(request, 'igarden/search.html')
-
-def upload_file(request):
     if request.method == 'POST':
-        f_file = request.FILES['flower_file']
-        print(f_file.name)
-        result = 1 # here substitute res from machine learning
-        return render(request, 'igarden/detail.html', {'flower': Flower.objects.get(id=result)})
-
-    return render(request, 'search.html')
+        # f_file = request.FILES['flower_file']
+        # print(f_file.name)
+        # (nazwa, index) = find_kwiatek_mondre_maszyny(f_file)
+        return render(request, 'igarden/detail.html', {'flower': Flower.objects.filter(name='Daisy')[0]})
+    return render(request, 'igarden/search.html')
