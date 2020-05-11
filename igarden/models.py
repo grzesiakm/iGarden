@@ -8,4 +8,4 @@ class Flower(models.Model):
     treatment = models.TextField()
 
     def __str__(self):
-        return Flower.name
+        return self.name

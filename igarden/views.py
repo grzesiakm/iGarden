@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
+from .models import Flower
 
 
 def home(request):
@@ -12,15 +13,9 @@ def lists(request):
 
 
 def search(request):
-    return render(request, 'igarden/search.html')
-
-
-def upload_file(request):
     if request.method == 'POST':
-        f_file = request.FILES['flower_file']
-        fs = FileSystemStorage()
-        fs.save(f_file.name, f_file)
-        print(f_file.name)
-    return render(request, 'search.html')
-
-
+        # f_file = request.FILES['flower_file']
+        # print(f_file.name)
+        # (nazwa, index) = find_kwiatek_mondre_maszyny(f_file)
+        return render(request, 'igarden/detail.html', {'flower': Flower.objects.filter(name='Daisy')[0]})
+    return render(request, 'igarden/search.html')
