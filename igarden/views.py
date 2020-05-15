@@ -1,18 +1,13 @@
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.core.files.storage import FileSystemStorage
-from .models import Flower
-from model.model import Model
 from PIL import Image
-
+from model.model import Model
+from .models import Flower
 
 def home(request):
     return render(request, 'igarden/home.html')
 
-
 def lists(request):
     return render(request, 'igarden/lists.html')
-
 
 def search(request):
     model = Model()
