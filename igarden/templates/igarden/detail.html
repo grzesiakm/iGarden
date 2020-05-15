@@ -1,6 +1,33 @@
 {%  extends "igarden/base.html" %}
 {% block content %}
-    <h1> {{ flower.name }} </h1>
-    <img src="{{flower.photo.url}}">
-    <p>{{flower.treatment}}</p>
+    <div class="content-section">
+        <div class="row">
+            <img class="col-4 img-thumbnail" src="{{flower.photo.url}}">
+            <div class="col-8 media-body">
+                <h2 >The flower you've been looking for is: </h2>
+                <h1 class="text-center">{{ flower.name }}</h1>
+                <h3>If you think about getting it, maybe some more information will be useful? Let's see what we know about {{ flower.name }}!</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <h3>Do you want to add {{ flower.name }} to one of your lists?</h3>
+                <div class="dropdown">
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Choose list</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">List 01</a>
+                        <a class="dropdown-item" href="#">List 02</a>
+                        <a class="dropdown-item" href="#">List 03</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <article class="flower-descr">
+                    {{flower.treatment}}
+                </article>
+            </div>
+
+        </div>
+
+    </div>
 {% endblock content %}
