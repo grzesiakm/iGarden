@@ -30,6 +30,6 @@ A Django web-application that recognises flowers based on uploaded image and pro
  - Create virtual environment using:
  `python -m venv your_env_name`
  - Open virtual environment using:
- `source your_env_name\bin\activate`
+ `source your_env_name/bin/activate`
  - Install all packages include in requirements.txt using:
  `pip3 install -r requirements.txt`
