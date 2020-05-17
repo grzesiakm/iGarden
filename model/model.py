@@ -20,4 +20,5 @@ class Model:
         image = np.array(image)
         image = np.expand_dims(image, axis=0)
         prediction = self.model.predict(image)
-        return self.names[np.argmax(prediction[0])]
+        found_index = np.argmax(prediction[0])
+        return (self.names[found_index], found_index)
