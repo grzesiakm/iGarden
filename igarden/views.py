@@ -1,5 +1,9 @@
 from django.shortcuts import render
-from django.utils.datastructures import MultiValueDictKeyError
+from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from .models import Flower, List
+from model.model import Model
 from PIL import Image
 
 from model.model import Model
@@ -10,7 +14,56 @@ def home(request):
     return render(request, 'igarden/home.html')
 
 def lists(request):
-    return render(request, 'igarden/lists.html')
+    context = {
+        'flowers': List.objects.all()
+    }
+    return render(request, 'igarden/lists.html', context)
+
+
+class FlowerListView(ListView):
+    model = List
+    template_name = 'igarden/lists.html'
+    context_object_name = 'flowers'
+    ordering = ['-date_searched']
+
+
+class FlowerDetailView(DetailView):
+    model = List
+
+
+class ListCreateView(LoginRequiredMixin, CreateView):
+    model = List
+    fields = ['flower_name', 'date_searched']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+class ListUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = List
+    fields = ['flower_name', 'date_searched']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test(self):
+        flower = self.get_object()
+        if self.request.user == flower.author:
+            return True
+        return False
+
+
+class ListDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = List
+    success_url = '/'
+
+    def test(self):
+        flower = self.get_object()
+        if self.request.user == flower.author:
+            return True
+        return False
 
 def search(request):
     model = Model()
