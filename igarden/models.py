@@ -16,7 +16,7 @@ class List(models.Model):
     name = models.CharField(max_length=20)
     date_searched = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    flower_names = models.ManyToManyField
+    flower_names = models.ManyToManyField(Flower)
 
     def __str__(self):
         return self.name

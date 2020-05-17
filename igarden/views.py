@@ -34,39 +34,6 @@ class FlowerDetailView(DetailView):
 class ListCreateView(LoginRequiredMixin, CreateView):
     model = List
     fields = ['flower_name', 'date_searched']
-<<<<<<< Updated upstream
-=======
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
-
-
-class ListUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = List
-    fields = ['flower_name', 'date_searched']
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
-
-    def test(self):
-        flower = self.get_object()
-        if self.request.user == flower.author:
-            return True
-        return False
-
-
-class ListDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = List
-    success_url = '/'
-
-    def test(self):
-        flower = self.get_object()
-        if self.request.user == flower.author:
-            return True
-        return False
->>>>>>> Stashed changes
 
     def form_valid(self, form):
         form.instance.author = self.request.user
