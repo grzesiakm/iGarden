@@ -23,26 +23,37 @@ def train_model():
     generator = tf.keras.preprocessing.image.ImageDataGenerator(
         rescale=1./255)
 
-    train_data_gen = generator.flow_from_directory(directory=str(data_dir) + "/train",
-                                                   batch_size=BATCH_SIZE_TRAIN,
-                                                   shuffle=True,
-                                                   target_size=(
+    generator_modified = keras.preprocessing.image.ImageDataGenerator(rescale=1./255.,
+                                                                      rotation_range=45,
+                                                                      width_shift_range=.15,
+                                                                      height_shift_range=.15,
+                                                                      horizontal_flip=True,
+                                                                      zoom_range=0.5
+                                                                      )
+
+    train_data_gen = generator_modified.flow_from_directory(directory=str(data_dir) + "/train",
+                                                            batch_size=BATCH_SIZE_TRAIN,
+                                                            shuffle=True,
+                                                            target_size=(
+        width, height),
+        classes=classes,
+        class_mode="sparse")
+    val_data_gen = generator.flow_from_directory(directory=str(data_dir) + "/test",
+                                                 batch_size=BATCH_SIZE_TEST,
+                                                 shuffle=True,
+                                                 target_size=(
         width, height),
         classes=classes,
         class_mode="sparse")
 
     model = builder.build_model()
-    model.fit(train_data_gen, epochs=EPOCHS)
+    history = model.fit(train_data_gen, epochs=EPOCHS,
+                        validation_data=val_data_gen)
 
-    test_data_gen = generator.flow_from_directory(directory=str(data_dir) + "/test",
-                                                  batch_size=BATCH_SIZE_TEST,
-                                                  shuffle=True,
-                                                  target_size=(
-        width, height),
-        classes=classes,
-        class_mode="sparse")
+    model.save("model.h5")
 
-    test_loss, test_acc = model.evaluate(test_data_gen)
-    print("accuracy = ", test_acc)
+    return history
 
-    model.save("./saved/model.h5")
+
+if __name__ == "__main__":
+    train_model()
