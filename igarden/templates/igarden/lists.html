@@ -1,4 +1,11 @@
 {%  extends "igarden/base.html" %}
 {% block content %}
     <h1>My Lists</h1>
+    <ul>
+        {% for list in userflowerslist_list %}
+        <li>{{ list.name }} - from {{ list.date_created }}</li>
+        {% empty %}
+        <li>No lists yet</li>
+        {% endfor %}
+    </ul>
 {% endblock content %}

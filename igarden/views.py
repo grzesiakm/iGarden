@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.views import generic
 from PIL import Image
 
@@ -10,12 +11,15 @@ from .forms import UploadPhotoForm
 def home(request):
     return render(request, 'igarden/home.html')
 
-@login_required
-def lists(request):
-    context = {
-        'flowers': UserFlowersList.objects.all()
-    }
-    return render(request, 'igarden/lists.html', context)
+
+@method_decorator(login_required, name='dispatch')
+class Lists(generic.ListView):
+    model = UserFlowersList
+    template_name = 'igarden/lists.html'
+
+    def get_queryset(self):
+        return UserFlowersList.objects.filter(owner=self.request.user)
+
 
 class Explore(generic.ListView):
     model = Flower
@@ -25,8 +29,10 @@ class Explore(generic.ListView):
         return Flower.objects.all()
 
 
+@login_required
 def fav(request):
-    return render(request, 'igarden/home.html')
+    # TODO make this work
+    return render(request, 'igarden/base.html')
 
 def search(request):
     model = Model()

@@ -1,13 +1,13 @@
 {%  extends "igarden/base.html" %}
 {% block content %}
-<h1>Explore</h1>
-<h2>Here's a list of all currently stored flowers</h2>
-<ul>
-    {% for flower in flower_list %}
-    <li>{{ flower.name }} - {{ flower.treatment }}</li>
-    {% empty %}
-    <li>No flowers found</li>
-    {% endfor %}
-</ul>
+    <h1>Explore</h1>
+    <h2>Here's a list of all currently stored flowers</h2>
+    <ul>
+        {% for flower in flower_list %}
+        <li>{{ flower.name }} - {{ flower.treatment }}</li>
+        {% empty %}
+        <li>No flowers found</li>
+        {% endfor %}
+    </ul>
 
 {% endblock content %}
