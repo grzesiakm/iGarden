@@ -2,7 +2,7 @@
 {% block content %}
     <div class="content-section">
         <div class="row">
-            <img class="col-4 img-thumbnail" src="{{flower.photo.url}}">
+            {% if flower.flower_photo.url is not null %} <<img class="col-4 img-thumbnail" src="{{ flower.flower_photo.url }}"> {% endif %}
             <div class="col-8 media-body">
                 <h2 >The flower you've been looking for is: </h2>
                 <h1 class="text-center">{{ flower.name }}</h1>

@@ -18,7 +18,7 @@ def train_model():
 
     BATCH_SIZE_TRAIN = 32
     BATCH_SIZE_TEST = 32
-    EPOCHS = 16
+    EPOCHS = 64
 
     generator = tf.keras.preprocessing.image.ImageDataGenerator(
         rescale=1./255)
