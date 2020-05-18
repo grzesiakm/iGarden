@@ -7,4 +7,5 @@ urlpatterns = [
     path('search/', views.search, name='igarden-search'),
     path('explore/', views.Explore.as_view(), name='igarden-explore'),
     path('fav/', views.fav, name='igarden-fav'),
+    path('create_list/', views.create_list, name='igarden-create-list')
 ]

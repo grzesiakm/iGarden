@@ -6,7 +6,7 @@ from PIL import Image
 
 from model.model import Model
 from .models import Flower, UserFlowersList
-from .forms import UploadPhotoForm
+from .forms import UploadPhotoForm, CreateListForm
 
 def home(request):
     return render(request, 'igarden/home.html')
@@ -19,6 +19,15 @@ class Lists(generic.ListView):
 
     def get_queryset(self):
         return UserFlowersList.objects.filter(owner=self.request.user)
+
+
+@login_required
+def create_list(request):
+    if request.method == 'POST':
+        form = CreateListForm(request.POST)
+    else:
+        form = CreateListForm()
+    return render(request, 'igarden/create_list.html', {'form': form})
 
 
 class Explore(generic.ListView):

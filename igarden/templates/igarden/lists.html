@@ -1,6 +1,8 @@
 {%  extends "igarden/base.html" %}
 {% block content %}
     <h1>My Lists</h1>
+    <a href="{% url 'igarden-create-list' %}">Add new list</a>
+
     <ul>
         {% for list in userflowerslist_list %}
         <li>{{ list.name }} - from {{ list.date_created }}</li>
