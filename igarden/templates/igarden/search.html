@@ -1,12 +1,15 @@
 {% extends "igarden/base.html" %}
 
 {% block content %}
-    <h1>Upload flower photo</h1>
+<div class="content-section">
+    <h2 class="text-center">Upload flower photo</h2>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form }}
-        <button type="submit">Upload</button>
+        <div class="d-inline-flex container p-3 mr-5">
+            <input type="file" name="flower_file" class="form-control-file border border-secondary rounded" data-toggle="tooltip" title="Click to choose file!">
+            <button type="submit" class="btn btn-info">Upload photo</button>
+        </div>
     </form>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
+</div>
 {% endblock content %}
