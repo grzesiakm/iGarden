@@ -25,9 +25,18 @@ class Lists(generic.ListView):
 def create_list(request):
     if request.method == 'POST':
         form = CreateListForm(request.POST)
+        if form.is_valid():
+            new_list = UserFlowersList()
+            new_list.name = form.cleaned_data['name']
+            new_list.owner = request.user
+            new_list.save()
+            for item in form.cleaned_data['elements']:
+                obj = Flower.objects.filter(name=item)[0]
+                new_list.elements.add(obj)
+        return render(request, 'igarden/create_list.html', {'form': form})
     else:
         form = CreateListForm()
-    return render(request, 'igarden/create_list.html', {'form': form})
+        return render(request, 'igarden/create_list.html', {'form': form})
 
 
 class Explore(generic.ListView):
