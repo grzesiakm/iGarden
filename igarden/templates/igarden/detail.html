@@ -1,6 +1,6 @@
 {%  extends "igarden/base.html" %}
 {% block content %}
     <h1> {{ flower.name }} </h1>
-    <!-- <img src="{{ flower.photo.url }}"> -->
+    {% if flower.flower_photo.url is not null %} <img src="{{ flower.flower_photo.url }}"> {% endif %}
     <p>{{ flower.treatment }}</p>
 {% endblock content %}

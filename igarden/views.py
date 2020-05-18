@@ -1,18 +1,17 @@
 from django.shortcuts import render
-from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Flower, List
-from model.model import Model
 from PIL import Image
 
 from model.model import Model
-from .models import Flower
+from .models import Flower, List
 from .forms import UploadPhotoForm
 
 def home(request):
     return render(request, 'igarden/home.html')
 
+@login_required
 def lists(request):
     context = {
         'flowers': List.objects.all()
