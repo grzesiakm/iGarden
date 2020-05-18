@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from Model.model import Model
 from PIL import Image
+
+from model.model import Model
 from .models import Flower, List
 from .forms import UploadPhotoForm
 
