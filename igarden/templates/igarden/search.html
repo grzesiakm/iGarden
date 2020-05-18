@@ -10,5 +10,6 @@
             <button type="submit" class="btn btn-info">Upload photo</button>
         </div>
     </form>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 </div>
 {% endblock content %}

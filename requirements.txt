@@ -4,3 +4,4 @@ gunicorn
 requests
 django-crispy-forms
 Pillow
+tensorflow
