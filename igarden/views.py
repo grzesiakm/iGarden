@@ -1,11 +1,10 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views import generic
 from PIL import Image
 
 from model.model import Model
-from .models import Flower, List
+from .models import Flower, UserFlowersList
 from .forms import UploadPhotoForm
 
 def home(request):
@@ -14,55 +13,20 @@ def home(request):
 @login_required
 def lists(request):
     context = {
-        'flowers': List.objects.all()
+        'flowers': UserFlowersList.objects.all()
     }
     return render(request, 'igarden/lists.html', context)
 
+class Explore(generic.ListView):
+    model = Flower
+    template_name = 'igarden/explore.html'
 
-class FlowerListView(ListView):
-    model = List
-    template_name = 'igarden/lists.html'
-    context_object_name = 'flowers'
-    ordering = ['-date_searched']
-
-
-class FlowerDetailView(DetailView):
-    model = List
+    def get_queryset(self):
+        return Flower.objects.all()
 
 
-class ListCreateView(LoginRequiredMixin, CreateView):
-    model = List
-    fields = ['flower_name', 'date_searched']
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
-
-
-class ListUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = List
-    fields = ['flower_name', 'date_searched']
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
-
-    def test(self):
-        flower = self.get_object()
-        if self.request.user == flower.author:
-            return True
-        return False
-
-
-class ListDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = List
-    success_url = '/'
-
-    def test(self):
-        flower = self.get_object()
-        if self.request.user == flower.author:
-            return True
-        return False
+def fav(request):
+    return render(request, 'igarden/home.html')
 
 def search(request):
     model = Model()
