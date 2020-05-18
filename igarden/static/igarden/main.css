@@ -5,6 +5,11 @@ body {
   background-repeat: no-repeat;
   color: #333333;
   margin-top: 3rem;
+  height: 100%;
+}
+
+html{
+height: 100%;
 }
 
 .page-content{
@@ -24,14 +29,25 @@ text-align: left;
 margin-top: 30px;
 }
 
+h3{
+color: #2c064f;
+text-align: left;
+}
+
 article{
-margin-right: 15%;
+    margin-right: 15%;
 }
 
 .article-img {
   height: 65px;
   width: 65px;
   margin-right: 16px;
+}
+
+article.flower-descr{
+    margin-right:15px;
+    margin-top: 15px;
+    margin left: 15px;
 }
 
 ul{
@@ -62,7 +78,7 @@ display: block;
   background: #ffffff;
   padding: 10px 20px;
   border: 1px solid #dddddd;
-  margin-right: 300px;
+  margin-right: 250px;
   border-radius: 3px;
   margin-bottom: 20px;
 }

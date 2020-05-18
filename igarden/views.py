@@ -8,6 +8,7 @@ from model.model import Model
 from .models import Flower, UserFlowersList
 from .forms import UploadPhotoForm, CreateListForm
 
+
 def home(request):
     return render(request, 'igarden/home.html')
 
