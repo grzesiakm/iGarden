@@ -1,13 +1,25 @@
 {%  extends "igarden/base.html" %}
 {% block content %}
-    <h1>My Lists</h1>
-    <a href="{% url 'igarden-create-list' %}">Add new list</a>
-
-    <ul>
-        {% for list in userflowerslist_list %}
-        <li>{{ list.name }} - from {{ list.date_created }}</li>
-        {% empty %}
-        <li>No lists yet</li>
-        {% endfor %}
-    </ul>
+<div class="content-section">
+    <div class="row">
+        <div class="card col-3">
+            <img class="icard-img-top account-img" style="width:100%" src="{{ user.profile.image.url }}">
+            <div class="card-body">
+                <h4 class="card-title">{{ user.username }}</h4>
+                <a href="{% url 'profile' %}" class="btn btn-primary">See Profile</a>
+                <a href="{% url 'igarden-create-list' %}" class="btn btn-success mt-2">Add new list</a>
+            </div>
+        </div>
+        <div class="col-9">
+            <h1>My Lists</h1>
+                <ul class="ml-3">
+                {% for list in userflowerslist_list %}
+                    <li><h3 class="ml-3">{{ list.name }}  </h3><p class="text-secondary">from {{ list.date_created }}</p></li>
+                {% empty %}
+                <li>No lists yet</li>
+                {% endfor %}
+                </ul>
+        </div>
+    </div>
+</div>
 {% endblock content %}

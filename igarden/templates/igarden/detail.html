@@ -1,6 +1,41 @@
 {%  extends "igarden/base.html" %}
 {% block content %}
-    <h1> {{ flower.name }} </h1>
-    {% if flower.flower_photo.url is not null %} <img src="{{ flower.flower_photo.url }}"> {% endif %}
-    <p>{{ flower.treatment }}</p>
+
+    <div class="content-section">
+        <div class="row">
+            {% if flower.flower_photo.url is not null %} <<img class="col-4 img-thumbnail" src="{{ flower.flower_photo.url }}">
+            {% else %} <<img class="col-4 img-thumbnail" src="https://pluspng.com/img-png/png-gamla-png-1690.png">
+            {% endif %}
+            <div class="col-8 media-body">
+                <h2 >The flower you've been looking for is: </h2>
+                <h1 class="text-center">{{ flower.name }}</h1>
+                <h4>If you think about getting it, maybe some more information will be useful? Let's see what we know about {{ flower.name }}!</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <h4>Do you want to add {{ flower.name }} to one of your lists?</h4>
+                <div class="dropdown">
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Choose list</button>
+                    <div class="dropdown-menu">
+                        {% for list in userflowerslist_list %}
+                            <a class="dropdown-item" href="#">{{ list.name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <a href="{% url 'igarden-create-list' %}">Add new list</a>
+            </div>
+            <div class="col-8">
+                <article class="flower-descr">
+                    {{flower.treatment}}
+                    <p>There should be a flower treatment description, a long, long text ....
+                    A flower, sometimes known as a bloom or blossom, is the reproductive structure found in flowering plants (plants of the division Magnoliophyta, also called angiosperms). The biological function of a flower is to affect reproduction, usually by providing a mechanism for the union of sperm with eggs. Flowers may facilitate outcrossing (fusion of sperm and eggs from different individuals in a population) resulting from cross pollination or allow selfing (fusion of sperm and egg from the same flower) when self pollination occurs. Some flowers produce diaspores without fertilization (parthenocarpy). Flowers contain sporangia and are the site where gametophytes develop. Many flowers have evolved to be attractive to animals, so as to cause them to be vectors for the transfer of pollen. After fertilization, the ovary of the flower develops into fruit containing seeds.
+                    In addition to facilitating the reproduction of flowering plants, flowers have long been admired and used by humans to bring beauty to their environment, and also as objects of romance, ritual, religion, medicine and as a source of food.
+                    </p>
+                </article>
+            </div>
+
+        </div>
+
+    </div>
 {% endblock content %}

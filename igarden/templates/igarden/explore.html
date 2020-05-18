@@ -1,13 +1,17 @@
 {%  extends "igarden/base.html" %}
 {% block content %}
-    <h1>Explore</h1>
-    <h2>Here's a list of all currently stored flowers</h2>
+<div class="content-section">
+
+    <h1 class = "text-center">Flowers base</h1>
+    <h4 class = "text-center">Here's a list of all currently stored flowers. If you want to learn something more about one of these - that's the right place!</h4>
     <ul>
         {% for flower in flower_list %}
-        <li>{{ flower.name }} - {{ flower.treatment }}</li>
+        <li class = "text-center"><a href="#">{{ flower.name }}</a></li>
         {% empty %}
         <li>No flowers found</li>
         {% endfor %}
     </ul>
+
+</div>
 
 {% endblock content %}
