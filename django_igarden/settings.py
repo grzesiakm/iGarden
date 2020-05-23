@@ -34,6 +34,7 @@ TEST_RUNNER = 'django_heroku.HerokuDiscoverRunner'
 INSTALLED_APPS = [
     'igarden.apps.IgardenConfig',
     'users.apps.UsersConfig',
+    'lists.apps.ListsConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
