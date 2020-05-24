@@ -15,6 +15,7 @@
                 <ul class="ml-3">
                 {% for list in userflowerslist_list %}
                     <li><h3 class="ml-3">{{ list.name }}  </h3><p class="text-secondary">from {{ list.date_created }}</p></li>
+                    <a href="{% url 'lists-delete-list' list.id %}">Delete list</a>
                 {% empty %}
                 <li>No lists yet</li>
                 {% endfor %}
