@@ -1,0 +1,12 @@
+{% extends "igarden/base.html" %}
+{% block content %}
+    <h2>{{ object.name }}</h2>
+    <ul>
+        {% for flower in object.elements.all %}
+        <li><a href="#">{{ flower.name }}</a></li>
+        {% empty %}
+        <li>No flowers found</li>
+        {% endfor %}
+    </ul>
+    
+{% endblock content %}
