@@ -32,13 +32,23 @@ def create_list(request):
         return redirect('lists-all')
     else:
         form = CreateListForm()
-        return render(request, 'lists/create_list.html', {'form': form})
+        return render(request, 'lists/list_create.html', {'form': form})
+
+
+@method_decorator(login_required, name='dispatch')
+class ListDetailView(generic.DetailView):
+    model = UserFlowersList
+    template_name = 'lists/list_detail.html'
+
+    def get_object(self, queryset=None):
+        id_ = self.kwargs.get('id')
+        return get_object_or_404(UserFlowersList, id=id_)
 
 
 @method_decorator(login_required, name='dispatch')
 class ListDeleteView(generic.DeleteView):
     model = UserFlowersList
-    template_name = 'lists/delete_list.html'
+    template_name = 'lists/list_delete.html'
     success_url = reverse_lazy('lists-all')
 
     def get_object(self, queryset=None):

@@ -1,4 +1,4 @@
-{%  extends "igarden/base.html" %}
+{% extends "igarden/base.html" %}
 {% block content %}
 <form action="." method="POST"> {% csrf_token %}
     <p>Really delete list "{{ object.name }}"?</p>
