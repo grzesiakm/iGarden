@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'igarden.apps.IgardenConfig',
     'users.apps.UsersConfig',
     'lists.apps.ListsConfig',
+    'reminders.apps.RemindersConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
