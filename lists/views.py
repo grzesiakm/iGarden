@@ -38,4 +38,4 @@ def create_list(request):
 @login_required
 def fav(request):
     # TODO make this work
-    return render(request, 'lists/base.html')
+    return render(request, 'igarden/base.html')
