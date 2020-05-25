@@ -5,7 +5,7 @@ from django.views import generic
 from PIL import Image
 from model.model import Model
 from .models import Flower, UserFlowersList
-from .forms import CreateListForm
+from .forms import CreateListForm, AddToListForm
 
 
 @method_decorator(login_required, name='dispatch')
@@ -33,7 +33,6 @@ def create_list(request):
     else:
         form = CreateListForm()
         return render(request, 'lists/create_list.html', {'form': form})
-
 
 @login_required
 def fav(request):

@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
 from django.views import generic
 from PIL import Image
 from model.model import Model
 from .models import Flower
 from .forms import UploadPhotoForm
+from .forms import Choose_flower
 
 
 def home(request):
@@ -43,9 +43,13 @@ def search(request):
     return render(request, 'igarden/search.html', {'form': form})
 
 
-class Explore(generic.ListView):
-    model = Flower
-    template_name = 'igarden/explore.html'
-
-    def get_queryset(self):
-        return Flower.objects.all()
+def detail(request):
+    if request.method == 'POST':
+        form = Choose_flower(request.POST)
+        if form.is_valid():
+            chosen_flower = form.cleaned_data.get('element')
+            chosen_flower = Flower.objects.filter(id=chosen_flower.id)[0]
+        return render(request, 'igarden/detail.html', {'flower': chosen_flower})
+    else:
+        form = Choose_flower()
+        return render(request, 'igarden/explore.html', {'form': form})

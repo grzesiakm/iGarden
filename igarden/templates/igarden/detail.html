@@ -13,17 +13,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-4">
-                <h4>Do you want to add {{ flower.name }} to one of your lists?</h4>
-                <div class="dropdown">
-                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Choose list</button>
-                    <div class="dropdown-menu">
-                        {% for list in userflowerslist_list %}
-                            <a class="dropdown-item" href="#">{{ list.name }}</a>
-                        {% endfor %}
-                    </div>
-                </div>
-                <a href="{% url 'lists-create-list' %}">Add new list</a>
+            <div class="col-4 mt-4">
+                <li>
+                    <ul><button type="button" class="btn btn-info">Add to list</button></ul>
+                    <ul><button type="button" class="btn btn-info">Add to favourites</button></ul>
+                    <ul><button type="button" class="btn btn-info">Set reminder</button></ul>
+                </li>
             </div>
             <div class="col-8">
                 <article class="flower-descr">
