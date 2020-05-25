@@ -6,7 +6,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from users.models import Profile
 from .models import Flower, UserFlowersList
-from .forms import CreateListForm
+from .forms import CreateListForm, AddToListForm
 
 
 @method_decorator(login_required, name='dispatch')
@@ -66,3 +66,4 @@ class ListFavourites(generic.ListView):
         logged_user = self.request.user
         logged_profile = Profile.objects.get(user=logged_user)
         return logged_profile.favourites.all()
+

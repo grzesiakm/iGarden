@@ -9,3 +9,10 @@ class CreateListForm(forms.Form):
 
     name = forms.CharField(max_length=100)
     elements = forms.ModelMultipleChoiceField(queryset=Flower.objects.all())
+
+
+class AddToListForm(forms.Form):
+    class Meta:
+        model = UserFlowersList
+
+    elements = forms.ModelMultipleChoiceField(queryset=UserFlowersList.objects.all())
