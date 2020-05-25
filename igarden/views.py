@@ -17,7 +17,6 @@ def search(request):
         form = UploadPhotoForm(request.POST, request.FILES)
         if form.is_valid():
             f_file = form.cleaned_data['file']
-            print(f_file)
             img = Image.open(f_file)
 
             try:

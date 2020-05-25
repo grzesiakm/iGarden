@@ -1,0 +1,12 @@
+{% extends "igarden/base.html" %}
+{% block content %}
+<h2>Favourites</h2>
+<ul>
+    {% for flower in objects %}
+    <li>{{ flower.name }}</li>
+    {% empty %}
+    <li>No flowers marked as favourite</li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}

@@ -4,6 +4,7 @@ from django.utils.decorators import method_decorator
 from django.views import generic
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
+from users.models import Profile
 from .models import Flower, UserFlowersList
 from .forms import CreateListForm, AddToListForm
 
@@ -55,7 +56,14 @@ class ListDeleteView(generic.DeleteView):
         id_ = self.kwargs.get('id')
         return get_object_or_404(UserFlowersList, id=id_)
 
-@login_required
-def fav(request):
-    # TODO make this work
-    return render(request, 'igarden/base.html')
+
+@method_decorator(login_required, name='dispatch')
+class ListFavourites(generic.ListView):
+    model = UserFlowersList
+    template_name = 'lists/fav.html'
+
+    def get_queryset(self):
+        logged_user = self.request.user
+        logged_profile = Profile.objects.get(user=logged_user)
+        return logged_profile.favourites.all()
+
