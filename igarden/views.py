@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
 from django.views import generic
 from PIL import Image
 from model.model import Model
@@ -17,7 +16,6 @@ def search(request):
         form = UploadPhotoForm(request.POST, request.FILES)
         if form.is_valid():
             f_file = form.cleaned_data['file']
-            print(f_file)
             img = Image.open(f_file)
 
             try:
