@@ -5,3 +5,6 @@ requests
 django-crispy-forms
 Pillow
 tensorflow
+numba
+cudatoolkit
+pyculib

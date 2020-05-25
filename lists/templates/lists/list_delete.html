@@ -1,0 +1,7 @@
+{% extends "igarden/base.html" %}
+{% block content %}
+<form action="." method="POST"> {% csrf_token %}
+    <p>Really delete list "{{ object.name }}"?</p>
+    <p><input type="submit" value="Yes"/> <a href="{% url 'lists-all' %}">Cancel</a></p>
+</form>
+{% endblock content %}

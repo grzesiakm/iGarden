@@ -4,7 +4,7 @@ from tensorflow import keras
 import numpy as np
 import pathlib
 
-import model_builder as builder
+import model_builder_transfer as builder
 
 
 def train_model():
