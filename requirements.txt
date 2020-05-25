@@ -8,3 +8,5 @@ tensorflow
 numba
 cudatoolkit
 pyculib
+celery==4.0.0
+redis==2.10.3
