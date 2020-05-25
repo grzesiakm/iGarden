@@ -3,8 +3,8 @@
 
     <div class="content-section">
         <div class="row">
-            {% if flower.flower_photo.url is not null %} <<img class="col-4 img-thumbnail" src="{{ flower.flower_photo.url }}">
-            {% else %} <<img class="col-4 img-thumbnail" src="https://pluspng.com/img-png/png-gamla-png-1690.png">
+            {% if flower.flower_photo.url is not null %} <img class="col-4 img-thumbnail" src="{{ flower.flower_photo.url }}">
+            {% else %} <img class="col-4 img-thumbnail" src="https://pluspng.com/img-png/png-gamla-png-1690.png">
             {% endif %}
             <div class="col-8 media-body">
                 <h2 >The flower you've been looking for is: </h2>
@@ -15,9 +15,9 @@
         <div class="row">
             <div class="col-4 mt-4">
                 <li>
-                    <ul><button type="button" class="btn btn-info">Add to list</button></ul>
-                    <ul><button type="button" class="btn btn-info">Add to favourites</button></ul>
-                    <ul><button type="button" class="btn btn-info">Set reminder</button></ul>
+                    <ul><a class="btn btn-info" href="#">Set reminder &#x1F4A7;</a></ul>
+                    <ul><a class="btn btn-info" href="#">Add to favourites &#x1F496;</a></ul>
+                    <ul><a class="btn btn-info" href="{% url 'igarden-add' %}">Add to list &#x1F4CC;</a></ul>
                 </li>
             </div>
             <div class="col-8">

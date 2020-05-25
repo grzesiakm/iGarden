@@ -5,6 +5,9 @@ from model.model import Model
 from .models import Flower
 from .forms import UploadPhotoForm
 from .forms import Choose_flower
+from lists.forms import AddToListForm
+from django.contrib import messages
+from lists.models import UserFlowersList
 
 
 def home(request):
@@ -52,3 +55,19 @@ def detail(request):
     else:
         form = Choose_flower()
         return render(request, 'igarden/explore.html', {'form': form})
+
+
+def add_to_list(request):
+    if request.method == 'POST':
+        form = AddToListForm(request.POST)
+        if form.is_valid():
+            #obj = flower
+            obj = Flower.objects.filter(name="Pansy")[0]
+            chosen_list = form.cleaned_data.get('element')
+            chosen_list = UserFlowersList.objects.filter(name=chosen_list.name)[0]
+            chosen_list.elements.add(obj)
+            messages.success(request, f"Flower has been added to the list successfully!")
+        return render(request, 'lists/list_detail.html', {'object': chosen_list})
+    else:
+        form = AddToListForm()
+        return render(request, 'igarden/list_add.html', {'form': form})

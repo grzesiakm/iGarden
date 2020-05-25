@@ -15,4 +15,4 @@ class AddToListForm(forms.Form):
     class Meta:
         model = UserFlowersList
 
-    elements = forms.ModelMultipleChoiceField(queryset=UserFlowersList.objects.all())
+    element = forms.ModelChoiceField(queryset=UserFlowersList.objects.all())
