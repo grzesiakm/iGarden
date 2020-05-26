@@ -1,7 +1,12 @@
 {% extends "igarden/base.html" %}
 {% block content %}
-<form action="." method="POST"> {% csrf_token %}
-    <p>Really delete list "{{ object.name }}"?</p>
-    <p><input type="submit" value="Yes"/> <a href="{% url 'lists-all' %}">Cancel</a></p>
-</form>
+<div class="content-section">
+    <form action="." method="POST"> {% csrf_token %}
+        <h2 class="text-center mb-3">Are you sure you want to delete "{{ object.name }}" list?</h2>
+        <p class="text-center">
+            <button class="btn btn-danger" dtype="submit" value="Yes, I am">Yes, I am</button>
+            <button href="{% url 'lists-all' %}" class="btn btn-info">No, take me back to my lists!</button>
+        </p>
+    </form>
+</div>
 {% endblock content %}
