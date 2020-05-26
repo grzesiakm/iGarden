@@ -137,5 +137,8 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Europe/Warsaw'
 
+#E-mail
+EMAIL_ADDRESS = 'pio'
+
 # Configure Django App for Heroku.
 django_heroku.settings(locals())
