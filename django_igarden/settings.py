@@ -138,7 +138,7 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Europe/Warsaw'
 
 #E-mail
-EMAIL_ADDRESS = 'pio'
+EMAIL_ADDRESS = 'marta1317.mg@gmail.com'
 
 # Configure Django App for Heroku.
 django_heroku.settings(locals())
