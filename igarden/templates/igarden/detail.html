@@ -16,7 +16,7 @@
             <div class="col-4 mt-4">
                 <li>
                     <ul><a class="btn btn-info" href="#">Set reminder &#x1F4A7;</a></ul>
-                    <ul><a class="btn btn-info" href="#">Add to favourites &#x1F496;</a></ul>
+                    <ul><a class="btn btn-info" href="{% url 'igarden-add-to-fav' flower.id %}">Add to favourites &#x1F496;</a></ul>
                     <ul><a class="btn btn-info" href="{% url 'igarden-add' flower.id %}">Add to list &#x1F4CC;</a></ul>
                 </li>
             </div>
