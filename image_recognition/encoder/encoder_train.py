@@ -18,7 +18,7 @@ encoding_dim = [1024, 128, 2]
 
 encoded = Dense(encoding_dim[0], activation='relu')(input_img)
 encoded = Dense(encoding_dim[1], activation='relu')(encoded)
-encoded = Dense(encoding_dim[2], activation='relu')(encoded)
+encoded = Dense(encoding_dim[2])(encoded)
 
 decoded = Dense(128, activation='relu')(encoded)
 decoded = Dense(1024, activation='relu')(decoded)
