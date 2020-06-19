@@ -66,4 +66,3 @@ class ListFavourites(generic.ListView):
         logged_user = self.request.user
         logged_profile = Profile.objects.get(user=logged_user)
         return logged_profile.favourites.all()
-
