@@ -33,3 +33,6 @@ A Django web-application that recognises flowers based on uploaded image and pro
  `source your_env_name/bin/activate`
  - Install all packages include in requirements.txt using:
  `pip3 install -r requirements.txt`
+
+### Additional info
+ - In order to start the app you need to have default image in folder /media.
