@@ -2,8 +2,8 @@ import os
 import smtplib
 import imghdr
 from email.message import EmailMessage
-from celery.decorators import periodic_tasks
-from celery.task.schedules import crontab
+from celery2.decorators import periodic_tasks
+from celery2.task.schedules import crontab
 
 
 @periodic_tasks(name="send")
