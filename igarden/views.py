@@ -76,7 +76,7 @@ def add_to_list(request, id):
 
 @login_required
 def add_to_fav(request, id):
-    id_ = id;
+    id_ = id
     obj = get_object_or_404(Flower, id=id_)
     if not UserFlowersList.objects.filter(name="Favourites"):
         new_list = UserFlowersList()

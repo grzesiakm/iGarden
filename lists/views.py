@@ -6,7 +6,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from users.models import Profile
 from .models import Flower, UserFlowersList
-from .forms import CreateListForm, AddToListForm
+from .forms import CreateListForm
 
 
 @method_decorator(login_required, name='dispatch')
@@ -58,11 +58,15 @@ class ListDeleteView(generic.DeleteView):
 
 
 @method_decorator(login_required, name='dispatch')
-class ListFavourites(generic.ListView):
+class ListFavourites(generic.DetailView):
     model = UserFlowersList
-    template_name = 'lists/fav.html'
+    template_name = 'lists/list_detail.html'
 
-    def get_queryset(self):
-        logged_user = self.request.user
-        logged_profile = Profile.objects.get(user=logged_user)
-        return logged_profile.favourites.all()
+    def get_object(self, queryset=None):
+        if not UserFlowersList.objects.filter(name="Favourites"):
+            new_list = UserFlowersList()
+            new_list.name = "Favourites"
+            new_list.owner = self.request.user
+            new_list.save()
+
+        return get_object_or_404(UserFlowersList, name='Favourites')
