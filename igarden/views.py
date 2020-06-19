@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.views import generic
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from PIL import Image
 from model.model import Model
 from .models import Flower
@@ -57,12 +57,13 @@ def detail(request):
         return render(request, 'igarden/explore.html', {'form': form})
 
 
-def add_to_list(request):
+@login_required
+def add_to_list(request, id):
     if request.method == 'POST':
         form = AddToListForm(request.POST)
         if form.is_valid():
-            #obj = flower
-            obj = Flower.objects.filter(name="Pansy")[0]
+            id_ = id;
+            obj = get_object_or_404(Flower, id=id_)
             chosen_list = form.cleaned_data.get('element')
             chosen_list = UserFlowersList.objects.filter(name=chosen_list.name)[0]
             chosen_list.elements.add(obj)
@@ -71,3 +72,19 @@ def add_to_list(request):
     else:
         form = AddToListForm()
         return render(request, 'igarden/list_add.html', {'form': form})
+
+
+@login_required
+def add_to_fav(request, id):
+    id_ = id;
+    obj = get_object_or_404(Flower, id=id_)
+    if not UserFlowersList.objects.filter(name="Favourites"):
+        new_list = UserFlowersList()
+        new_list.name = "Favourites"
+        new_list.owner = request.user
+        new_list.save()
+    chosen_list = get_object_or_404(UserFlowersList, name="Favourites")
+    chosen_list.elements.add(obj)
+    messages.success(request, f"Flower has been successfully added to favourites!")
+    return render(request, 'lists/list_detail.html', {'object': chosen_list})
+
