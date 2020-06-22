@@ -1,10 +1,8 @@
 django==3.0.7
-django-heroku
-gunicorn
-requests
-django-crispy-forms
-Pillow
-tensorflow
-numba
-cudatoolkit
+gunicorn==20.0.4
+requests==2.22.0
+django-crispy-forms==1.9.0
+Pillow==7.0.0
+tensorflow==2.2.0
+numba==0.48.0
 pyculib

@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views import generic
-from PIL import Image
-from model.model import Model
+from django.shortcuts import redirect, get_object_or_404
+from django.urls import reverse_lazy
+from users.models import Profile
 from .models import Flower, UserFlowersList
 from .forms import CreateListForm
 
@@ -29,13 +30,43 @@ def create_list(request):
             for item in form.cleaned_data['elements']:
                 obj = Flower.objects.filter(name=item)[0]
                 new_list.elements.add(obj)
-        return render(request, 'lists/create_list.html', {'form': form})
+        return redirect('lists-all')
     else:
         form = CreateListForm()
-        return render(request, 'lists/create_list.html', {'form': form})
+        return render(request, 'lists/list_create.html', {'form': form})
 
 
-@login_required
-def fav(request):
-    # TODO make this work
-    return render(request, 'igarden/base.html')
+@method_decorator(login_required, name='dispatch')
+class ListDetailView(generic.DetailView):
+    model = UserFlowersList
+    template_name = 'lists/list_detail.html'
+
+    def get_object(self, queryset=None):
+        id_ = self.kwargs.get('id')
+        return get_object_or_404(UserFlowersList, id=id_)
+
+
+@method_decorator(login_required, name='dispatch')
+class ListDeleteView(generic.DeleteView):
+    model = UserFlowersList
+    template_name = 'lists/list_delete.html'
+    success_url = reverse_lazy('lists-all')
+
+    def get_object(self, queryset=None):
+        id_ = self.kwargs.get('id')
+        return get_object_or_404(UserFlowersList, id=id_)
+
+
+@method_decorator(login_required, name='dispatch')
+class ListFavourites(generic.DetailView):
+    model = UserFlowersList
+    template_name = 'lists/list_detail.html'
+
+    def get_object(self, queryset=None):
+        if not UserFlowersList.objects.filter(name="Favourites"):
+            new_list = UserFlowersList()
+            new_list.name = "Favourites"
+            new_list.owner = self.request.user
+            new_list.save()
+
+        return get_object_or_404(UserFlowersList, name='Favourites')

@@ -3,8 +3,8 @@
 
     <div class="content-section">
         <div class="row">
-            {% if flower.flower_photo.url is not null %} <<img class="col-4 img-thumbnail" src="{{ flower.flower_photo.url }}">
-            {% else %} <<img class="col-4 img-thumbnail" src="https://pluspng.com/img-png/png-gamla-png-1690.png">
+            {% if flower.flower_photo.url is not null %} <img class="col-4 img-thumbnail" src="{{ flower.flower_photo.url }}">
+            {% else %} <img class="col-4 img-thumbnail" src="https://pluspng.com/img-png/png-gamla-png-1690.png">
             {% endif %}
             <div class="col-8 media-body">
                 <h2 >The flower you've been looking for is: </h2>
@@ -13,17 +13,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-4">
-                <h4>Do you want to add {{ flower.name }} to one of your lists?</h4>
-                <div class="dropdown">
-                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Choose list</button>
-                    <div class="dropdown-menu">
-                        {% for list in userflowerslist_list %}
-                            <a class="dropdown-item" href="#">{{ list.name }}</a>
-                        {% endfor %}
-                    </div>
-                </div>
-                <a href="{% url 'lists-create-list' %}">Add new list</a>
+            <div class="col-4 mt-4">
+                <li>
+                    <ul><a class="btn btn-info" href="#">Set reminder &#x1F4A7;</a></ul>
+                    <ul><a class="btn btn-info" href="{% url 'igarden-add-to-fav' flower.id %}">Add to favourites &#x1F496;</a></ul>
+                    <ul><a class="btn btn-info" href="{% url 'igarden-add' flower.id %}">Add to list &#x1F4CC;</a></ul>
+                </li>
             </div>
             <div class="col-8">
                 <article class="flower-descr">

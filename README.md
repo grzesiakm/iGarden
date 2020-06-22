@@ -33,3 +33,9 @@ A Django web-application that recognises flowers based on uploaded image and pro
  `source your_env_name/bin/activate`
  - Install all packages include in requirements.txt using:
  `pip3 install -r requirements.txt`
+
+## Docker
+ - Build an image using:
+ `(sudo) docker build -t your_container_name .`
+ - Run the app using:
+ `(sudo) docker run -p8000:8000 your_container_name`

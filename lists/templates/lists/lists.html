@@ -11,10 +11,18 @@
             </div>
         </div>
         <div class="col-9">
-            <h1>My Lists</h1>
+            <h1 class = "mt-1 mb-3">{{ user.username }} Lists</h1>
                 <ul class="ml-3">
                 {% for list in userflowerslist_list %}
-                    <li><h3 class="ml-3">{{ list.name }}  </h3><p class="text-secondary">from {{ list.date_created }}</p></li>
+                    <li>
+                        <h3 class="ml-3">{{ list.name }}
+                            <div class="btn-group btn-group-sm">
+                                <a href="{% url 'lists-see-list' list.id %}" class="btn btn-info">See list</a>
+                                <a href="{% url 'lists-delete-list' list.id %}" class="btn btn-warning">Delete list</a>
+                            </div>
+                        </h3>
+                        <p class="text-secondary ml-4">from {{ list.date_created }}</p>
+                    </li>
                 {% empty %}
                 <li>No lists yet</li>
                 {% endfor %}

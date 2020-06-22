@@ -1,10 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.views import generic
 from PIL import Image
 from model.model import Model
 from .models import Flower
 from .forms import UploadPhotoForm
+from .forms import Choose_flower
+from lists.forms import AddToListForm
+from django.contrib import messages
+from lists.models import UserFlowersList
 
 
 def home(request):
@@ -17,7 +20,6 @@ def search(request):
         form = UploadPhotoForm(request.POST, request.FILES)
         if form.is_valid():
             f_file = form.cleaned_data['file']
-            print(f_file)
             img = Image.open(f_file)
 
             try:
@@ -43,9 +45,46 @@ def search(request):
     return render(request, 'igarden/search.html', {'form': form})
 
 
-class Explore(generic.ListView):
-    model = Flower
-    template_name = 'igarden/explore.html'
+def detail(request):
+    if request.method == 'POST':
+        form = Choose_flower(request.POST)
+        if form.is_valid():
+            chosen_flower = form.cleaned_data.get('element')
+            chosen_flower = Flower.objects.filter(id=chosen_flower.id)[0]
+        return render(request, 'igarden/detail.html', {'flower': chosen_flower})
+    else:
+        form = Choose_flower()
+        return render(request, 'igarden/explore.html', {'form': form})
 
-    def get_queryset(self):
-        return Flower.objects.all()
+
+@login_required
+def add_to_list(request, id):
+    if request.method == 'POST':
+        form = AddToListForm(request.POST)
+        if form.is_valid():
+            id_ = id;
+            obj = get_object_or_404(Flower, id=id_)
+            chosen_list = form.cleaned_data.get('element')
+            chosen_list = UserFlowersList.objects.filter(name=chosen_list.name)[0]
+            chosen_list.elements.add(obj)
+            messages.success(request, f"Flower has been added to the list successfully!")
+        return render(request, 'lists/list_detail.html', {'object': chosen_list})
+    else:
+        form = AddToListForm()
+        return render(request, 'igarden/list_add.html', {'form': form})
+
+
+@login_required
+def add_to_fav(request, id):
+    id_ = id
+    obj = get_object_or_404(Flower, id=id_)
+    if not UserFlowersList.objects.filter(name="Favourites"):
+        new_list = UserFlowersList()
+        new_list.name = "Favourites"
+        new_list.owner = request.user
+        new_list.save()
+    chosen_list = get_object_or_404(UserFlowersList, name="Favourites")
+    chosen_list.elements.add(obj)
+    messages.success(request, f"Flower has been successfully added to favourites!")
+    return render(request, 'lists/list_detail.html', {'object': chosen_list})
+

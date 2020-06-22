@@ -3,13 +3,11 @@
 {% block content %}
 <div class="content-section">
 
-    <h1 class = "text-center">Flowers base</h1>
-    <h4 class = "text-center">Here's a list of all currently stored flowers. If you want to learn something more about one of these - that's the right place!</h4>
-
+    <h1 class = "text-center">Add to list</h1>
     <form method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-3">Choose from:</legend>
+            <legend class="border-bottom mb-3">Choose list:</legend>
             {{ form|crispy }}
             <button type="submit" class="btn btn-info">Submit</button>
         </fieldset>
