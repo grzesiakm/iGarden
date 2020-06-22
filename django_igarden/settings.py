@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-import django_heroku
+# import django_heroku
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -25,7 +25,8 @@ SECRET_KEY = 'xh1l$2)wh0e)-#*h^-(292f8q99ldun-oo$d3mmjvb53@6p62z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0',
+                '0.0.0.0:8000']
 
 TEST_RUNNER = 'django_heroku.HerokuDiscoverRunner'
 
@@ -129,4 +130,4 @@ LOGIN_REDIRECT_URL = 'igarden-home'
 LOGIN_URL = 'login'
 
 # Configure Django App for Heroku.
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
