@@ -25,7 +25,8 @@ SECRET_KEY = 'xh1l$2)wh0e)-#*h^-(292f8q99ldun-oo$d3mmjvb53@6p62z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0',
+                '0.0.0.0:8000']
 
 TEST_RUNNER = 'django_heroku.HerokuDiscoverRunner'
 
